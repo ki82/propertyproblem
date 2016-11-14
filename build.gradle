@@ -1,0 +1,29 @@
+apply plugin: "groovy"
+apply plugin: "eclipse"
+
+dependencies {
+	testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+	testCompile gradleTestKit()
+	testCompile 'junit:junit:4.12'
+}
+
+repositories {
+	mavenCentral()
+}
+
+configurations.all {
+	resolutionStrategy {
+		force 'org.codehaus.groovy:groovy-all:2.4.7'
+	}
+}
+
+task createJson {
+	doFirst {
+		def jsonFile = new File(outputJsonFile)
+		jsonFile.write("DUMMY")
+	}	
+}
+
+wrapper {
+	gradleVersion = '3.1'
+}
